@@ -1,19 +1,23 @@
+import config.PropertiesFile;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+
+import java.util.Properties;
 
 public class BaseTest {
 
     WebDriver driver;
-    private final static String ENTRY_URL = "https://rynekpierwotny.pl/";
 
     @BeforeTest
     void setup() {
-        System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");
-        driver = new FirefoxDriver();
+        Properties properties = new Properties();
+        PropertiesFile.readPropertiesFile();
+        driver.get(properties.getProperty("driverPath"));
+        driver = new ChromeDriver();
+        driver.get(properties.getProperty("url"));
         driver.manage().window().maximize();
-        driver.navigate().to(ENTRY_URL);
     }
 
     @AfterTest

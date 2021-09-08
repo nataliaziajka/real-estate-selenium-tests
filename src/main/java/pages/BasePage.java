@@ -1,9 +1,13 @@
 package pages;
 
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+
 public class BasePage {
+
+    @Getter
     public WebDriver driver;
 
     public BasePage(WebDriver driver) {
@@ -11,8 +15,5 @@ public class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
 }
 
