@@ -6,15 +6,17 @@ import java.util.Properties;
 
 public class PropertiesFile {
 
-    public static void readPropertiesFile(){
+    public static Properties readPropertiesFile(){
          Properties prop = new Properties();
         try{
-            InputStream input = new FileInputStream("src/test/java/config/config.properties");
+            InputStream input = getClass().getClassLoader().getResourceAsStream(prop);
             prop.load(input);
         }
         catch (Exception e) {
             e.printStackTrace();
 
-        }}
+        }
+        return prop;
+    }
 
 }

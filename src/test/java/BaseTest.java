@@ -14,7 +14,7 @@ public class BaseTest {
     void setup() {
         Properties properties = new Properties();
         PropertiesFile.readPropertiesFile();
-        driver.get(properties.getProperty("driverPath"));
+
         driver = new ChromeDriver();
         driver.get(properties.getProperty("url"));
         driver.manage().window().maximize();
