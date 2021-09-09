@@ -12,9 +12,7 @@ public class BaseTest {
 
     @BeforeTest
     void setup() {
-        Properties properties = new Properties();
-        PropertiesFile.readPropertiesFile();
-
+        Properties properties = PropertiesFile.readPropertiesFile();
         driver = new ChromeDriver();
         driver.get(properties.getProperty("url"));
         driver.manage().window().maximize();

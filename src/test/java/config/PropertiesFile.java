@@ -7,9 +7,9 @@ import java.util.Properties;
 public class PropertiesFile {
 
     public static Properties readPropertiesFile(){
-         Properties prop = new Properties();
+         Properties prop = PropertiesFile.readPropertiesFile();
         try{
-            InputStream input = getClass().getClassLoader().getResourceAsStream(prop);
+            InputStream input = PropertiesFile.class.getClass().getClassLoader().getResourceAsStream("src/test/resources/config.properties");
             prop.load(input);
         }
         catch (Exception e) {
