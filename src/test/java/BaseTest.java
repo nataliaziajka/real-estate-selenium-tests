@@ -8,18 +8,19 @@ import java.util.Properties;
 
 public class BaseTest {
 
-    WebDriver driver;
+    protected WebDriver driver;
+    protected Properties prop;
 
     @BeforeTest
     void setup() {
-        Properties prop = new Properties();
+
+       prop = new Properties();
         try {
             prop.load(new FileInputStream("src/test/resources/config.properties"));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String chromeDriverPath = prop.getProperty("driverPath");
-        System.setProperty("webdriver.chrome.driver", chromeDriverPath);
+        System.setProperty("webdriver.chrome.driver", prop.getProperty("driverPath"));
         driver = new ChromeDriver();
         driver.get(prop.getProperty("url"));
         driver.manage().window().maximize();

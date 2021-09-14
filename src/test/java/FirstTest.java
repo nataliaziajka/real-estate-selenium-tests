@@ -5,7 +5,7 @@ import pages.RynekPierwotnyPage;
 
 public class FirstTest extends BaseTest {
 
-    @Test
+    @Test(groups = {"functest"})
     public void findFlatsFromYourCity() {
         val page = new RynekPierwotnyPage(driver);
         page.waitToPageToLoad();
