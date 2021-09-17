@@ -33,7 +33,7 @@ public class RynekPierwotnyPage extends BasePage {
         await()
                 .alias("Page was not loaded")
                 .pollDelay(Duration.ofSeconds(10))
-                .atMost(Duration.ofSeconds(40))
+                .atMost(Duration.ofSeconds(20))
                 .pollInterval(Duration.ofSeconds(10))
                 .until(() -> searchField.isDisplayed());
     }

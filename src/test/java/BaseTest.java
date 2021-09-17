@@ -1,6 +1,8 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
 import java.io.FileInputStream;
@@ -11,7 +13,7 @@ public class BaseTest {
     protected WebDriver driver;
     protected Properties prop;
 
-    @BeforeTest
+    @BeforeMethod
     void setup() {
 
        prop = new Properties();
@@ -26,7 +28,7 @@ public class BaseTest {
         driver.manage().window().maximize();
     }
 
-    @AfterTest
+    @AfterMethod
     void finish() {
         driver.quit();
     }
