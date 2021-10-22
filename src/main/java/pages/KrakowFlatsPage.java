@@ -4,9 +4,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.time.Duration;
+
+import static org.awaitility.Awaitility.await;
+
 public class KrakowFlatsPage extends BasePage {
 
-    @FindBy(css = ".rp-149nj2r > div:nth-child(1) > div:nth-child(1) > span:nth-child(1)")
+    @FindBy(xpath = "//section[1]//span[text()='Mieszkania, Domy']")
     private WebElement flatTypeMenu;
 
     @FindBy(xpath = "//section[1]//span[text()='Domy']")
@@ -43,6 +47,7 @@ public class KrakowFlatsPage extends BasePage {
         super(driver);
     }
 
+
     public KrakowFlatsPage selectFlatType() {
         flatTypeMenu.click();
         homeCheckbox.click();
@@ -74,8 +79,13 @@ public class KrakowFlatsPage extends BasePage {
         price_To.sendKeys("60");
         return this;
     }
-
-
-
+    public void waitToPageToLoad() {
+        await()
+                .alias("Page was not loaded")
+                .pollDelay(Duration.ofSeconds(10))
+                .atMost(Duration.ofSeconds(20))
+                .pollInterval(Duration.ofSeconds(10))
+                .until(() -> flatTypeMenu.isDisplayed());
+    }
 
 }

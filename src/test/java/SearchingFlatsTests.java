@@ -14,13 +14,14 @@ public class SearchingFlatsTests extends BaseTest {
         page.setSearchFieldAndConfirm("Kraków");
         //Assertions.assertThat(page.getSearchField().getAttribute("value")).isEqualTo("Kraków");
     }
-    @Test(dependsOnMethods = "findFlatsFromYourCity")
-    public void findFlatsWithSelectedSizeAndNumberOfRooms(){
-        val page = new KrakowFlatsPage(driver);
-        page.selectFlatType();
-        page.selectRoomsNumbers();
-        page.selectFlatSize();
-        page.selectFlatPrice();
-        //Assertions...
-    }
+//    @Test(dependsOnMethods = "findFlatsFromYourCity")
+//    public void findFlatsWithSelectedSizeAndNumberOfRooms(){
+//        val page = new KrakowFlatsPage(driver);
+//        page.waitToPageToLoad();
+//        page.selectFlatType();
+//        page.selectRoomsNumbers();
+//        page.selectFlatSize();
+//        page.selectFlatPrice();
+//        //Assertions...
+//    }
 }
