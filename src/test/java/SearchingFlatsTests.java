@@ -9,7 +9,7 @@ public class SearchingFlatsTests extends BaseTest {
     @Test(groups = {"functest"})
     public void findFlatsFromYourCity() {
         searchFlats();
-        //Assertions.assertThat(page.getSearchField().getAttribute("value")).isEqualTo("Kraków");
+        //Assertions.assertThat(page.getSearchField().getAttribute("value")).isEqualTo("Krakow");
     }
 
     @Test(groups = {"functest"})
