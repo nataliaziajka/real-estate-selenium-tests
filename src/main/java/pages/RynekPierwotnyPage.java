@@ -5,6 +5,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -18,6 +20,9 @@ public class RynekPierwotnyPage extends BasePage {
     @Getter
     @FindBy(css = "input[data-testid='search-autocomplete']")
     private WebElement searchField;
+
+    @FindBy(xpath = "//div[@data-testid='search-autocomplete-dropdown']//ul")
+    private WebElement searchResults;
 
     public RynekPierwotnyPage(WebDriver driver) {
         super(driver);
@@ -40,7 +45,9 @@ public class RynekPierwotnyPage extends BasePage {
 
     public void setSearchFieldAndConfirm(String value) {
         setSearchField(value);
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOf(searchResults));
         searchField.sendKeys(Keys.ENTER);
+
     }
 }
 
