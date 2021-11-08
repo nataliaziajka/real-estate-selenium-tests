@@ -3,6 +3,8 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -50,6 +52,7 @@ public class KrakowFlatsPage extends BasePage {
 
     public KrakowFlatsPage selectFlatType() {
         flatTypeMenu.click();
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOf(homeCheckbox));
         homeCheckbox.click();
         confirmButton.click();
         return this;
@@ -57,6 +60,7 @@ public class KrakowFlatsPage extends BasePage {
 
     public KrakowFlatsPage selectRoomsNumbers() {
         roomMenu.click();
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOf(roomNumber));
         roomNumber.click();
         confirmButton.click();
         return this;
@@ -64,6 +68,7 @@ public class KrakowFlatsPage extends BasePage {
 
     public KrakowFlatsPage selectFlatSize() {
         flatMenu.click();
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOf(size_From));
         size_From.click();
         size_From.sendKeys("50");
         size_To.click();
@@ -73,6 +78,7 @@ public class KrakowFlatsPage extends BasePage {
 
     public KrakowFlatsPage selectFlatPrice() {
         priceMenu.click();
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOf(price_From));
         price_From.click();
         price_From.sendKeys("50");
         price_To.click();
