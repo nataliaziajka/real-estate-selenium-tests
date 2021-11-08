@@ -1,5 +1,6 @@
 import lombok.val;
 
+import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 import pages.KrakowFlatsPage;
 import pages.RynekPierwotnyPage;
@@ -9,7 +10,6 @@ public class SearchingFlatsTests extends BaseTest {
     @Test(groups = {"functest"})
     public void findFlatsFromYourCity() {
         searchFlats();
-        //Assertions.assertThat(page.getSearchField().getAttribute("value")).isEqualTo("Krakow");
     }
 
     @Test(groups = {"functest"})
@@ -22,7 +22,8 @@ public class SearchingFlatsTests extends BaseTest {
         krakowFlatsPage.selectRoomsNumbers();
         krakowFlatsPage.selectFlatSize();
         krakowFlatsPage.selectFlatPrice();
-        //Assertions...
+        Assertions.assertThat(krakowFlatsPage.getResultMessage().getText().matches("Znaleziono (\\d+) ofert w (\\d+) inwestycjach"));
+
     }
 
     private KrakowFlatsPage searchFlats() {

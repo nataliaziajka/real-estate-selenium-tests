@@ -45,6 +45,13 @@ public class KrakowFlatsPage extends BasePage {
     @FindBy(xpath = "//input[@data-testid='input-price__upper']")
     private WebElement price_To;
 
+    public WebElement getResultMessage() {
+        return resultMessage;
+    }
+
+    @FindBy(css = "div.rp-14vknz7")
+    private  WebElement resultMessage;
+
     public KrakowFlatsPage(WebDriver driver) {
         super(driver);
     }
