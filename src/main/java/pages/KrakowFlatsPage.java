@@ -1,16 +1,21 @@
 package pages;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
 import static org.awaitility.Awaitility.await;
 
 public class KrakowFlatsPage extends BasePage {
+
+    private static final By PRICE_FROM = By.xpath("//input[@data-testid='input-price__lower']");
+    private static final By SIZE_FROM = By.xpath("//input[@data-testid='input-area__lower']");
+    private static final By ROOM_NUMBER = By.xpath("//section[1]//div/span/span[text()='3']");
+    private static final By HOME_CHECKBOX = By.xpath("//section[1]//span[text()='Domy']");
 
     @FindBy(xpath = "//section[1]//span[text()='Mieszkania, Domy']")
     private WebElement flatTypeMenu;
@@ -50,7 +55,7 @@ public class KrakowFlatsPage extends BasePage {
     }
 
     @FindBy(css = "div.rp-14vknz7")
-    private  WebElement resultMessage;
+    private WebElement resultMessage;
 
     public KrakowFlatsPage(WebDriver driver) {
         super(driver);
@@ -59,7 +64,7 @@ public class KrakowFlatsPage extends BasePage {
 
     public KrakowFlatsPage selectFlatType() {
         flatTypeMenu.click();
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOf(homeCheckbox));
+        waitForHomeCheckboxToLoad();
         homeCheckbox.click();
         confirmButton.click();
         return this;
@@ -67,7 +72,7 @@ public class KrakowFlatsPage extends BasePage {
 
     public KrakowFlatsPage selectRoomsNumbers() {
         roomMenu.click();
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOf(roomNumber));
+        waitForRoomNumberToLoad();
         roomNumber.click();
         confirmButton.click();
         return this;
@@ -75,23 +80,24 @@ public class KrakowFlatsPage extends BasePage {
 
     public KrakowFlatsPage selectFlatSize() {
         flatMenu.click();
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOf(size_From));
+        waitForSizeFromToLoad();
         size_From.click();
         size_From.sendKeys("50");
         size_To.click();
         size_To.sendKeys("60");
-       return this;
+        return this;
     }
 
     public KrakowFlatsPage selectFlatPrice() {
         priceMenu.click();
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOf(price_From));
+        waitForPriceFromToLoad();
         price_From.click();
-        price_From.sendKeys("50");
+        price_From.sendKeys("500000");
         price_To.click();
-        price_To.sendKeys("60");
+        price_To.sendKeys("600000");
         return this;
     }
+
     public void waitToPageToLoad() {
         await()
                 .alias("Page was not loaded")
@@ -101,4 +107,19 @@ public class KrakowFlatsPage extends BasePage {
                 .until(() -> flatTypeMenu.isDisplayed());
     }
 
+    private void waitForPriceFromToLoad() {
+        await().until(() -> CollectionUtils.isNotEmpty(driver.findElements(PRICE_FROM)));
+    }
+
+    private void waitForSizeFromToLoad() {
+        await().until(() -> CollectionUtils.isNotEmpty(driver.findElements(SIZE_FROM)));
+    }
+
+    private void waitForRoomNumberToLoad() {
+        await().until(() -> CollectionUtils.isNotEmpty(driver.findElements(ROOM_NUMBER)));
+    }
+
+    private void waitForHomeCheckboxToLoad() {
+        await().until(() -> CollectionUtils.isNotEmpty(driver.findElements(HOME_CHECKBOX)));
+    }
 }

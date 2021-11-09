@@ -22,8 +22,7 @@ public class SearchingFlatsTests extends BaseTest {
         krakowFlatsPage.selectRoomsNumbers();
         krakowFlatsPage.selectFlatSize();
         krakowFlatsPage.selectFlatPrice();
-        Assertions.assertThat(krakowFlatsPage.getResultMessage().getText().matches("Znaleziono (\\d+) ofert w (\\d+) inwestycjach"));
-
+        Assertions.assertThat(krakowFlatsPage.getResultMessage().getText().matches("Znaleziono (\\d+) oferta w (\\d+) inwestycjach"));
     }
 
     private KrakowFlatsPage searchFlats() {
