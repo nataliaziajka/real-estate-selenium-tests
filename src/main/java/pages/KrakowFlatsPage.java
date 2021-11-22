@@ -2,9 +2,12 @@ package pages;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -12,114 +15,67 @@ import static org.awaitility.Awaitility.await;
 
 public class KrakowFlatsPage extends BasePage {
 
-    private static final By PRICE_FROM = By.xpath("//input[@data-testid='input-price__lower']");
-    private static final By SIZE_FROM = By.xpath("//input[@data-testid='input-area__lower']");
-    private static final By ROOM_NUMBER = By.xpath("//section[1]//div/span/span[text()='3']");
-    private static final By HOME_CHECKBOX = By.xpath("//section[1]//span[text()='Domy']");
+    private static final By SEARCH_RESULTS = By.xpath("//div[@data-testid='search-autocomplete-dropdown']//ul");
 
     @FindBy(xpath = "//section[1]//span[text()='Mieszkania, Domy']")
     private WebElement flatTypeMenu;
 
-    @FindBy(xpath = "//section[1]//span[text()='Domy']")
-    private WebElement homeCheckbox;
+    @FindBy(xpath = "//section[1]//span[text()='Powierzchnia']")
+    private WebElement flatMenu;
 
-    @FindBy(css = "div.rp-1uxkh7x:nth-child(3) > button:nth-child(1)")
-    private WebElement confirmButton;
+    @FindBy(css = "div.rp-14vknz7")
+    private WebElement resultMessage;
 
     @FindBy(xpath = "//section[1]//span[text()='Pokoje']")
     private WebElement roomMenu;
 
-    @FindBy(xpath = "//section[1]//div/span/span[text()='3']")
-    private WebElement roomNumber;
-
-    @FindBy(xpath = "//section[1]//span[text()='Powierzchnia']")
-    private WebElement flatMenu;
-
-    @FindBy(xpath = "//input[@data-testid='input-area__lower']")
-    private WebElement size_From;
-
-    @FindBy(xpath = "//input[@data-testid='input-area__upper']")
-    private WebElement size_To;
-
     @FindBy(xpath = "//section[1]//span[text()='Cena']")
     private WebElement priceMenu;
 
-    @FindBy(xpath = "//input[@data-testid='input-price__lower']")
-    private WebElement price_From;
+    @FindBy(css = "input[data-testid='search-autocomplete']")
+    private WebElement searchField;
 
-    @FindBy(xpath = "//input[@data-testid='input-price__upper']")
-    private WebElement price_To;
+    @FindBy(xpath = "//div[@data-testid='search-autocomplete-dropdown']//ul")
+    private WebElement searchResults;
 
     public WebElement getResultMessage() {
         return resultMessage;
     }
 
-    @FindBy(css = "div.rp-14vknz7")
-    private WebElement resultMessage;
-
     public KrakowFlatsPage(WebDriver driver) {
         super(driver);
     }
 
-
-    public KrakowFlatsPage selectFlatType() {
-        flatTypeMenu.click();
-        waitForHomeCheckboxToLoad();
-        homeCheckbox.click();
-        confirmButton.click();
-        return this;
-    }
-
-    public KrakowFlatsPage selectRoomsNumbers() {
-        roomMenu.click();
-        waitForRoomNumberToLoad();
-        roomNumber.click();
-        confirmButton.click();
-        return this;
-    }
-
-    public KrakowFlatsPage selectFlatSize() {
-        flatMenu.click();
-        waitForSizeFromToLoad();
-        size_From.click();
-        size_From.sendKeys("50");
-        size_To.click();
-        size_To.sendKeys("60");
-        return this;
-    }
-
-    public KrakowFlatsPage selectFlatPrice() {
-        priceMenu.click();
-        waitForPriceFromToLoad();
-        price_From.click();
-        price_From.sendKeys("500000");
-        price_To.click();
-        price_To.sendKeys("600000");
-        return this;
-    }
-
-    public void waitToPageToLoad() {
+    public void waitToKrakowFlatsPageToLoad() {
         await()
                 .alias("Page was not loaded")
                 .pollDelay(Duration.ofSeconds(10))
                 .atMost(Duration.ofSeconds(20))
                 .pollInterval(Duration.ofSeconds(10))
-                .until(() -> flatTypeMenu.isDisplayed());
+                .until(() -> searchField.isDisplayed());
+    }
+    public void openNieruchomosciPage(){
+        flatTypeMenu.click();
+    }
+    public void openPokojePage(){
+        roomMenu.click();
+    }
+    public void openPowierzchniaPage() {
+        flatMenu.click();
+    }
+    public void openCenaPage() {
+        priceMenu.click();
+    }
+    public void waitForResultsToLoad() {
+        await().until(() -> CollectionUtils.isNotEmpty(driver.findElements(SEARCH_RESULTS)));
     }
 
-    private void waitForPriceFromToLoad() {
-        await().until(() -> CollectionUtils.isNotEmpty(driver.findElements(PRICE_FROM)));
-    }
+    public void searchFlats(String cityName) {
+        searchField.clear();
+        searchField.sendKeys(cityName);
+        //new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.visibilityOf(searchResults));
+        waitForResultsToLoad();
+        searchField.sendKeys(Keys.ENTER);
 
-    private void waitForSizeFromToLoad() {
-        await().until(() -> CollectionUtils.isNotEmpty(driver.findElements(SIZE_FROM)));
-    }
-
-    private void waitForRoomNumberToLoad() {
-        await().until(() -> CollectionUtils.isNotEmpty(driver.findElements(ROOM_NUMBER)));
-    }
-
-    private void waitForHomeCheckboxToLoad() {
-        await().until(() -> CollectionUtils.isNotEmpty(driver.findElements(HOME_CHECKBOX)));
     }
 }
