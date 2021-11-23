@@ -15,26 +15,26 @@ public class SearchingFlatsTests extends BaseTest {
 
     @Test(groups = {"functest"})
     public void findFlatsWithSelectedSizeAndNumberOfRooms(){
-        val krakowFlatsPage = new KrakowFlatsPage(driver);
+        KrakowFlatsPage krakowFlatsPage = new KrakowFlatsPage(driver);
         krakowFlatsPage.waitToKrakowFlatsPageToLoad();
         krakowFlatsPage.searchFlats("Kraków");
 
-        val nieruchomosciPage = new NieruchomosciPage(driver);
+        NieruchomosciPage nieruchomosciPage = new NieruchomosciPage(driver);
         krakowFlatsPage.openNieruchomosciPage();
         nieruchomosciPage.waitToNieruchomosciPageToLoad();
         nieruchomosciPage.selectNieruchomosciType();
 
-        val pokojePage = new PokojePage(driver);
+        PokojePage pokojePage = new PokojePage(driver);
         krakowFlatsPage.openPokojePage();
         pokojePage.waitToPokojePageToLoad();
         pokojePage.selectRoomsNumbers();
 
-        val powierzchniaPage = new PowierzchniaPage(driver);
+        PowierzchniaPage powierzchniaPage = new PowierzchniaPage(driver);
         krakowFlatsPage.openPowierzchniaPage();
         powierzchniaPage.waitToPowierzchniaPageToLoad();
         powierzchniaPage.selectFlatSize();
 
-        val cenaPage = new CenaPage(driver);
+        CenaPage cenaPage = new CenaPage(driver);
         krakowFlatsPage.openCenaPage();
         cenaPage.waitToCenaPageToLoad();
         cenaPage.selectFlatPrice();
