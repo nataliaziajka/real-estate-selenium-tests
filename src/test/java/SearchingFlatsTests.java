@@ -2,7 +2,7 @@ import lombok.val;
 
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
-import pages.*;
+import pageobjects.*;
 
 public class SearchingFlatsTests extends BaseTest {
 

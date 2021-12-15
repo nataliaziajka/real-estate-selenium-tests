@@ -1,14 +1,14 @@
 pipeline {
     agent any
     stages {
-        stage('Build test code') {
+        stage('Build KafelkiTest code') {
             steps {
                 sh 'mvn clean install -DskipTests'
             }
         }
-        stage('Execute test') {
+        stage('Execute KafelkiTest') {
             steps {
-                sh 'mvn test'
+                sh 'mvn KafelkiTest'
             }
         }
         stage('Generate allure report') {

@@ -1,4 +1,4 @@
-package pages;
+package pageobjects;
 
 import lombok.Getter;
 import org.openqa.selenium.Keys;

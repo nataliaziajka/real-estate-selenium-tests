@@ -1,4 +1,4 @@
-package pages;
+package pageobjects;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.openqa.selenium.By;
