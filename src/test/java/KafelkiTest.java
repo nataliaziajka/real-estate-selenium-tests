@@ -1,9 +1,9 @@
-import org.assertj.core.api.Assertions;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 import pageobjects.KrakowFlatsResultsPage;
 
-public class KafelkiTest extends KrakowFlatsResultsPage {
+public class KafelkiTest extends BaseTest {
 
     private WebDriver driver;
 
@@ -11,14 +11,10 @@ public class KafelkiTest extends KrakowFlatsResultsPage {
     public void checkKafelki(){
 
         driver.get("https://rynekpierwotny.pl/s/nowe-mieszkania-i-domy-krakowski/");
-        testKafelkiList();
-        //Assertions.assertThat();
+        KrakowFlatsResultsPage krakowFlatsResultsPage = new KrakowFlatsResultsPage(driver);
+        krakowFlatsResultsPage.testKafelkiList();
 
-//        List<KafelkaData> kafelki =  KafelkaData.getKafelkiList();
-//        return kafelki.forEach(kafelka -> {
-//            System.out.println(KafelkaData.getPropertyName());
-//            System.out.println(KafelkaData.getFlatSize());
-//            System.out.println(KafelkaData.getFlatRooms());
+
 
         }
 
