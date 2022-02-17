@@ -9,8 +9,6 @@ public class KafelkiTest extends SearchingFlatsTests{
 
     @Test(groups = {"functest"})
     public void checkKafelki(){
-
-        selectCity();
         KrakowFlatsPage krakowFlatsPage = selectCity();
         selectFlatType(krakowFlatsPage);
         selectRooms(krakowFlatsPage);
@@ -19,7 +17,6 @@ public class KafelkiTest extends SearchingFlatsTests{
         KrakowFlatsResultsPage krakowFlatsResultsPage = new KrakowFlatsResultsPage(driver);
         Kafelka pierwsza = krakowFlatsResultsPage.getKafelka(1);
         Assertions.assertThat(pierwsza.getPropertyName()).isEqualTo("Dzień dobry na Heltmana");
-
     }
     }
 

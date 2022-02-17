@@ -1,5 +1,3 @@
-import lombok.val;
-
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 import pageobjects.*;
@@ -19,7 +17,7 @@ public class SearchingFlatsTests extends BaseTest {
         selectSize(krakowFlatsPage);
         selectPrice(krakowFlatsPage);
 
-        Assertions.assertThat(krakowFlatsPage.getResultMessage().getText().matches("Znaleziono (\\d+) oferta w (\\d+) inwestycjach")).isTrue();
+        Assertions.assertThat(krakowFlatsPage.getResultMessage().getText()).matches("(Znaleziono (\\d+) ofert w (\\d+) inwestycjach (\\S*\\s){4}\\S*)|(Znaleziono (\\d+) ofert w (\\d+) inwestycjach )");
     }
 
     protected void selectPrice(KrakowFlatsPage krakowFlatsPage) {
