@@ -1,21 +1,26 @@
 
-import org.openqa.selenium.WebDriver;
+import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
+import pageobjects.Kafelka;
+import pageobjects.KrakowFlatsPage;
 import pageobjects.KrakowFlatsResultsPage;
 
-public class KafelkiTest extends BaseTest {
-
-    private WebDriver driver;
+public class KafelkiTest extends SearchingFlatsTests{
 
     @Test(groups = {"functest"})
     public void checkKafelki(){
 
-        driver.get("https://rynekpierwotny.pl/s/nowe-mieszkania-i-domy-krakowski/");
+        selectCity();
+        KrakowFlatsPage krakowFlatsPage = selectCity();
+        selectFlatType(krakowFlatsPage);
+        selectRooms(krakowFlatsPage);
+        selectSize(krakowFlatsPage);
+        selectPrice(krakowFlatsPage);
         KrakowFlatsResultsPage krakowFlatsResultsPage = new KrakowFlatsResultsPage(driver);
-        krakowFlatsResultsPage.testKafelkiList();
-
-
-
-        }
+        Kafelka pierwsza = krakowFlatsResultsPage.getKafelka(1);
+        Assertions.assertThat(pierwsza.getPropertyName()).isEqualTo("Dzień dobry na Heltmana");
 
     }
+    }
+
+

@@ -1,27 +1,16 @@
 package pageobjects;
 
+import lombok.Builder;
+import lombok.Getter;
+@Builder
+@Getter
 public class Kafelka {
 
-    private static String propertyName;
-    private static int flatSize;
-    private static int flatRooms;
+    private String propertyName;
+    private String flatReady;
+    private String flatSize;
+    private String flatRooms;
 
-    public Kafelka(String propertyName, int flatSize, int flatRooms) {
-        this.propertyName = propertyName;
-        this.flatSize = flatSize;
-        this.flatRooms = flatRooms;
-    }
-    
-    public static String getPropertyName() {
-        return propertyName;
-    }
 
-    public static int getFlatSize() {
-        return flatSize;
-    }
-
-    public static int getFlatRooms() {
-        return flatRooms;
-    }
 }
 

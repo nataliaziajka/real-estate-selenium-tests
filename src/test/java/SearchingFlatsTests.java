@@ -8,38 +8,53 @@ public class SearchingFlatsTests extends BaseTest {
 
     @Test(groups = {"functest"})
     public void findFlatsFromYourCity() {
-        val krakowFlatsPage = new KrakowFlatsPage(driver);
-        krakowFlatsPage.waitToKrakowFlatsPageToLoad();
-        krakowFlatsPage.searchFlats("Kraków");
+        KrakowFlatsPage krakowFlatsPage = selectCity();
     }
 
     @Test(groups = {"functest"})
     public void findFlatsWithSelectedSizeAndNumberOfRooms(){
-        KrakowFlatsPage krakowFlatsPage = new KrakowFlatsPage(driver);
-        krakowFlatsPage.waitToKrakowFlatsPageToLoad();
-        krakowFlatsPage.searchFlats("Kraków");
+        KrakowFlatsPage krakowFlatsPage = selectCity();
+        selectFlatType(krakowFlatsPage);
+        selectRooms(krakowFlatsPage);
+        selectSize(krakowFlatsPage);
+        selectPrice(krakowFlatsPage);
 
-        NieruchomosciPage nieruchomosciPage = new NieruchomosciPage(driver);
-        krakowFlatsPage.openNieruchomosciPage();
-        nieruchomosciPage.waitToNieruchomosciPageToLoad();
-        nieruchomosciPage.selectNieruchomosciType();
+        Assertions.assertThat(krakowFlatsPage.getResultMessage().getText().matches("Znaleziono (\\d+) oferta w (\\d+) inwestycjach")).isTrue();
+    }
 
-        PokojePage pokojePage = new PokojePage(driver);
-        krakowFlatsPage.openPokojePage();
-        pokojePage.waitToPokojePageToLoad();
-        pokojePage.selectRoomsNumbers();
-
-        PowierzchniaPage powierzchniaPage = new PowierzchniaPage(driver);
-        krakowFlatsPage.openPowierzchniaPage();
-        powierzchniaPage.waitToPowierzchniaPageToLoad();
-        powierzchniaPage.selectFlatSize();
-
+    protected void selectPrice(KrakowFlatsPage krakowFlatsPage) {
         CenaPage cenaPage = new CenaPage(driver);
         krakowFlatsPage.openCenaPage();
         cenaPage.waitToCenaPageToLoad();
         cenaPage.selectFlatPrice();
+    }
 
-        Assertions.assertThat(krakowFlatsPage.getResultMessage().getText().matches("Znaleziono (\\d+) oferta w (\\d+) inwestycjach"));
+    protected void selectSize(KrakowFlatsPage krakowFlatsPage) {
+        PowierzchniaPage powierzchniaPage = new PowierzchniaPage(driver);
+        krakowFlatsPage.openPowierzchniaPage();
+        powierzchniaPage.waitToPowierzchniaPageToLoad();
+        powierzchniaPage.selectFlatSize();
+    }
+
+    protected void selectRooms(KrakowFlatsPage krakowFlatsPage) {
+        PokojePage pokojePage = new PokojePage(driver);
+        krakowFlatsPage.openPokojePage();
+        pokojePage.waitToPokojePageToLoad();
+        pokojePage.selectRoomsNumbers();
+    }
+
+    protected void selectFlatType(KrakowFlatsPage krakowFlatsPage) {
+        NieruchomosciPage nieruchomosciPage = new NieruchomosciPage(driver);
+        krakowFlatsPage.openNieruchomosciPage();
+        nieruchomosciPage.waitToNieruchomosciPageToLoad();
+        nieruchomosciPage.selectNieruchomosciType();
+    }
+
+    protected KrakowFlatsPage selectCity() {
+        KrakowFlatsPage krakowFlatsPage = new KrakowFlatsPage(driver);
+        krakowFlatsPage.waitToKrakowFlatsPageToLoad();
+        krakowFlatsPage.searchFlats("Kraków");
+        return krakowFlatsPage;
     }
 
 }
