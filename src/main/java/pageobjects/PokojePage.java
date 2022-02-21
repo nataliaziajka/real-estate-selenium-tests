@@ -35,7 +35,7 @@ public class PokojePage extends KrakowFlatsPage{
     public void waitToPokojePageToLoad() {
         await()
                 .alias("Page was not loaded")
-                .pollDelay(Duration.ofSeconds(10))
+               // .pollDelay(Duration.ofSeconds(10))
                 .atMost(Duration.ofSeconds(20))
                 .pollInterval(Duration.ofSeconds(10))
                 .until(() -> roomMenu.isDisplayed());
