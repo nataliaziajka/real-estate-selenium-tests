@@ -30,7 +30,7 @@ public class PowierzchniaPage extends BasePage {
         super(driver);
     }
     public PowierzchniaPage  selectFlatSize() {
-        waitForSizeFromToLoad();
+        waitForSizeFormToLoad();
         size_From.click();
         size_From.sendKeys("50");
         size_To.click();
@@ -47,7 +47,7 @@ public class PowierzchniaPage extends BasePage {
                 .pollInterval(Duration.ofSeconds(10))
                 .until(() -> flatMenu.isDisplayed());
     }
-    public void waitForSizeFromToLoad() {
+    public void waitForSizeFormToLoad() {
         await().until(() -> CollectionUtils.isNotEmpty(driver.findElements(SIZE_FROM)));
     }
 

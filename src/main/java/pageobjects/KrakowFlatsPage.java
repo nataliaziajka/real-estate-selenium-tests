@@ -14,6 +14,8 @@ import static org.awaitility.Awaitility.await;
 public class KrakowFlatsPage extends BasePage {
 
     private static final By SEARCH_RESULTS = By.xpath("//div[@data-testid='search-autocomplete-dropdown']//ul");
+    private static final String SEARCH_FIELD_LOCATOR = "input[data-testid='search-autocomplete']";
+
 
     @FindBy(xpath = "//section[1]//span[text()='Mieszkania, Domy']")
     private WebElement flatTypeMenu;
@@ -30,7 +32,7 @@ public class KrakowFlatsPage extends BasePage {
     @FindBy(xpath = "//section[1]//span[text()='Cena']")
     private WebElement priceMenu;
 
-    @FindBy(css = "input[data-testid='search-autocomplete']")
+    @FindBy(css = SEARCH_FIELD_LOCATOR)
     private WebElement searchField;
 
     @FindBy(xpath = "//div[@data-testid='search-autocomplete-dropdown']//ul")
@@ -47,10 +49,14 @@ public class KrakowFlatsPage extends BasePage {
     public void waitToKrakowFlatsPageToLoad() {
         await()
                 .alias("Page was not loaded")
-                .pollDelay(Duration.ofSeconds(10))
-                .atMost(Duration.ofSeconds(20))
-                .pollInterval(Duration.ofSeconds(10))
-                .until(() -> searchField.isDisplayed());
+                .pollDelay(Duration.ofSeconds(2))
+                .atMost(Duration.ofSeconds(10))
+                .pollInterval(Duration.ofSeconds(1))
+                .until(this::isSearchFieldPresent);
+    }
+
+    public boolean isSearchFieldPresent(){
+        return CollectionUtils.isNotEmpty(driver.findElements(By.cssSelector(SEARCH_FIELD_LOCATOR)));
     }
     public void openNieruchomosciPage(){
         flatTypeMenu.click();
