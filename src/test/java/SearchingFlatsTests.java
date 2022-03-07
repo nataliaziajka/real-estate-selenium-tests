@@ -17,7 +17,7 @@ public class SearchingFlatsTests extends BaseTest {
         selectSize(krakowFlatsPage);
         selectPrice(krakowFlatsPage);
 
-        Assertions.assertThat(krakowFlatsPage.getResultMessage().getText()).matches("(Znaleziono (\\d+) ofert. w (\\d+) inwestycjach (\\S*\\s){4}\\S*)|(Znaleziono (\\d+) ofert. w (\\d+) inwestycjach )");
+        Assertions.assertThat(krakowFlatsPage.getResultMessage().getText()).matches("(Znaleziono (\\d+) ofert w (\\d+) inwestycjach (\\S*\\s){4}\\S*)|(Znaleziono (\\d+) ofert. w (\\d+) inwestycjach )");
     }
 
     protected void selectPrice(KrakowFlatsPage krakowFlatsPage) {
