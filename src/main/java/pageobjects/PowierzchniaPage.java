@@ -42,7 +42,7 @@ public class PowierzchniaPage extends BasePage {
     public void waitToPowierzchniaPageToLoad() {
         await()
                 .alias("Page was not loaded")
-                .pollDelay(Duration.ofSeconds(10))
+                .pollDelay(Duration.ofSeconds(2))
                 .atMost(Duration.ofSeconds(20))
                 .pollInterval(Duration.ofSeconds(10))
                 .until(() -> flatMenu.isDisplayed());

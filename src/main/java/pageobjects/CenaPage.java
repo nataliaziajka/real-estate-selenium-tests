@@ -40,7 +40,7 @@ public class CenaPage extends BasePage{
     public void waitToCenaPageToLoad() {
         await()
                 .alias("Page was not loaded")
-                .pollDelay(Duration.ofSeconds(10))
+                .pollDelay(Duration.ofSeconds(2))
                 .atMost(Duration.ofSeconds(20))
                 .pollInterval(Duration.ofSeconds(10))
                 .until(() -> price_From.isDisplayed());
