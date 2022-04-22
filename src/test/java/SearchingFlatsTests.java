@@ -4,10 +4,6 @@ import pageobjects.*;
 
 public class SearchingFlatsTests extends BaseTest {
 
-    @Test(groups = {"functest"})
-    public void findFlatsFromYourCity() {
-        KrakowFlatsPage krakowFlatsPage = selectCity();
-    }
 
     @Test(groups = {"functest"})
     public void findFlatsWithSelectedSizeAndNumberOfRooms(){
@@ -17,7 +13,7 @@ public class SearchingFlatsTests extends BaseTest {
         selectSize(krakowFlatsPage);
         selectPrice(krakowFlatsPage);
 
-        Assertions.assertThat(krakowFlatsPage.getResultMessage().getText()).matches("(Znaleziono (\\d+) ofert w (\\d+) inwestycjach (\\S*\\s){4}\\S*)|(Znaleziono (\\d+) ofert. w (\\d+) inwestycjach )");
+        Assertions.assertThat(krakowFlatsPage.getResultMessage().getText().trim()).matches("(Znaleziono (\\d+) ofert[y]? w (\\d+) inwestycjach (\\S*\\s){4}\\S*)|(Znaleziono (\\d+) ofert[y]? w (\\d+) inwestycjach )");
     }
 
     protected void selectPrice(KrakowFlatsPage krakowFlatsPage) {

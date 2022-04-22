@@ -6,6 +6,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -38,6 +40,9 @@ public class KrakowFlatsPage extends BasePage {
     @FindBy(xpath = "//div[@data-testid='search-autocomplete-dropdown']//ul")
     private WebElement searchResults;
 
+    @FindBy(css = "div.modal-close-button:nth-child(7) > svg")
+    private WebElement popup;
+
     public WebElement getResultMessage() {
         return resultMessage;
     }
@@ -54,6 +59,10 @@ public class KrakowFlatsPage extends BasePage {
                 .pollInterval(Duration.ofSeconds(1))
                 .until(this::isSearchFieldPresent);
     }
+    public void waitToPopupToLoad() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait.until(ExpectedConditions.elementToBeClickable(popup));
+    }
 
     public boolean isSearchFieldPresent(){
         return CollectionUtils.isNotEmpty(driver.findElements(By.cssSelector(SEARCH_FIELD_LOCATOR)));
@@ -67,9 +76,10 @@ public class KrakowFlatsPage extends BasePage {
     public void openPowierzchniaPage() {
         flatMenu.click();
     }
-    public void openCenaPage() {
-        priceMenu.click();
-    }
+    public void openCenaPage() { priceMenu.click(); }
+    public void close_popup() {
+        waitToPopupToLoad();
+        popup.click(); }
     public void waitForResultsToLoad() {
         await().until(() -> CollectionUtils.isNotEmpty(driver.findElements(SEARCH_RESULTS)));
     }

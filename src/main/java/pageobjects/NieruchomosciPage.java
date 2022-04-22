@@ -34,7 +34,7 @@ public class NieruchomosciPage extends KrakowFlatsPage{
     public void waitToNieruchomosciPageToLoad() {
         await()
                 .alias("Page was not loaded")
-                .pollDelay(Duration.ofSeconds(10))
+                .pollDelay(Duration.ofSeconds(2))
                 .atMost(Duration.ofSeconds(20))
                 .pollInterval(Duration.ofSeconds(10))
                 .until(() -> flatTypeMenu.isDisplayed());
